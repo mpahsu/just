@@ -47,7 +47,13 @@ once_cell = "1.19.0"
 percent-encoding = "2.3.1"
 rand = "0.9.0"
 regex = "1.10.4"
-rustversion = "1.0.18"
+# We unpin the rustversion dependency version because Meta has a version
+# conflict between this dependency and the same dependency in axum:
+# just v1.42.4: rustversion 1.0.18
+# axum v0.7.9:  rustversion ^1.0.9 (locked to 1.0.14)
+# This seems to be fine and maybe the version specification is overly specific
+# here.
+rustversion = "1"
 semver = "1.0.20"
 serde = { version = "1.0.130", features = ["derive", "rc"] }
 serde_json = "1.0.68"
