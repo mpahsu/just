@@ -23,7 +23,15 @@ blake3 = { version = "1.5.0", features = ["rayon", "mmap"] }
 camino = "1.0.4"
 chrono = "0.4.38"
 clap = { version = "4.0.0", features = ["derive", "env", "wrap_help"] }
-clap_complete = "=4.5.48"
+# We unpin the clap_complete dependency version because Meta has a version
+# conflict between this dependency and the same dependency in cargo:
+# just v1.42.4: clap_complete =4.5.48
+# cargo v0.91:  clap_complete ^4.5.54
+# The clap_complete version was pinned in
+# commit 644bda5c0e79b17d03a2e6f70430cc361c235b97 because of an issue with
+# running `just --completions bash` (https://github.com/casey/just/issues/2732).
+# If you are okay without this functionality, then this change should be fine.
+clap_complete = "4"
 clap_mangen = "0.2.20"
 ctrlc = { version = "3.1.1", features = ["termination"] }
 derive-where = "1.2.7"
